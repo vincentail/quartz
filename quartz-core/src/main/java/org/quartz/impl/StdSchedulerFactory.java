@@ -384,6 +384,7 @@ public class StdSchedulerFactory implements SchedulerFactory {
             throw initException;
         }
 
+        //通过org.quartz.properties指定的配置文件后者默认的quartz.properties文件
         String requestedFile = System.getProperty(PROPERTIES_FILE);
         String propFileName = requestedFile != null ? requestedFile
                 : "quartz.properties";
@@ -410,7 +411,7 @@ public class StdSchedulerFactory implements SchedulerFactory {
                             + propFileName + "' could not be read.", ioe);
                     throw initException;
                 }
-            } else if (requestedFile != null) {
+            } else if (requestedFile != null) {//项目中配置的quartz.properties文件
                 in =
                     Thread.currentThread().getContextClassLoader().getResourceAsStream(requestedFile);
 
