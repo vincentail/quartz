@@ -644,6 +644,7 @@ public class StdSchedulerFactory implements SchedulerFactory {
         String threadName = cfg.getStringProperty(PROP_SCHED_THREAD_NAME,
                 schedName + "_QuartzSchedulerThread");
 
+        //schedule 实例id
         String schedInstId = cfg.getStringProperty(PROP_SCHED_INSTANCE_ID,
                 DEFAULT_INSTANCE_ID);
 
@@ -733,8 +734,10 @@ public class StdSchedulerFactory implements SchedulerFactory {
             String uid = (rmiBindName == null) ? QuartzSchedulerResources.getUniqueIdentifier(
                     schedName, schedInstId) : rmiBindName;
 
+            //rmi 方式
             RemoteScheduler remoteScheduler = new RemoteScheduler(uid, rmiHost, rmiPort);
 
+             //远程的sheduler注册到本地
             schedRep.bind(remoteScheduler);
 
             return remoteScheduler;
